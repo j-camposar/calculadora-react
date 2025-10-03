@@ -87,7 +87,7 @@ Antes de comenzar asegúrate de tener instalado:
 ```
 **Inválido:**
 ```javascript
-     function HolaMundo() {
+     function hola_mundo() {
         console.log('Hola Mundo')
      }
 ```
