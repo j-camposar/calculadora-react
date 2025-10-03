@@ -2,7 +2,7 @@ name: Quality Check - React
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "deploy" ]
 
 jobs:
   lint-and-test:
