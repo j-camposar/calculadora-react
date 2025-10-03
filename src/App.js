@@ -1,5 +1,5 @@
 import "./App.css";
-import calculadora from "./Calculadora";
+import Calculadora from "./Calculadora";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -11,4 +11,4 @@ function App() {
 	);
 }
 
-export default App
+export default App;
