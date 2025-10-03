@@ -19,6 +19,7 @@ const Calculadora = () => {
 				<Form.Control
 					placeholder="0"
 					value={input}
+                    readOnly
 					aria-label="Resultado"
 					aria-describedby="basic-addon1"
 				/>
