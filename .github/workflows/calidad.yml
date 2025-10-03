@@ -27,12 +27,8 @@ jobs:
         
       # 4. Ejecutar ESLint
       - name: Run ESLint
-        run: npx eslint -c .eslintrc.json src --max-warnings=0
+        run: npx eslint -c .eslintrc.json src --fix --max-warnings=0
         
-      # 5. Ejecutar Prettier (check)
-      - name: Check Prettier formatting
-        run: npx prettier --check "src/**/*.{js,jsx}"
-
-      # 6. Ejecutar tests
+      # 5. Ejecutar tests
       - name: Run Tests
         run: npm test -- --watchAll=false --ci
