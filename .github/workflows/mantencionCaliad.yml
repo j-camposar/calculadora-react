@@ -1,0 +1,25 @@
+name: Comprobando mi Codigo 
+on: 
+  pull_request:
+    branches: ["main"]
+jobs:
+  comprobar-calidad-y-testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repositorio
+        uses: actions/checkout@v4
+
+      - name: configurar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name : Install dependencias
+        run : npm ci
+      
+      - name: Comprobando reglas
+        run : npx eslint -c .eslintrc.json src --fix --max-warnings=0
+
+      - name: run test
+        run : npm test -- --watchAll=false --ci
