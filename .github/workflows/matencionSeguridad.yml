@@ -12,15 +12,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
       - run: npm ci
-      - name: Run Snyk (checks vulnerabilities)
+      - name: Run Snyk test
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SECRET_SNYK_TOKEN }}
         with:
-          args: test --all-projects --json
-      - name: Save Snyk JSON report
-        run: snyk test --all-projects --json > snyk-report.json
-        env:
-          SNYK_TOKEN: ${{ secrets.SECRET_SNYK_TOKEN }}
+          command: test
+          args: --all-projects --json
