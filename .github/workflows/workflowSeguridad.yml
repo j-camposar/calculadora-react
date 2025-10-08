@@ -1,0 +1,36 @@
+name: seguirdad con snyk y sonarcloud
+on:
+  push:
+    branches: [ workflowSeguridad ]
+
+jobs :
+  snyk-and-sonarcloud:
+    runs-on: ubuntu-latest
+    steps: 
+      
+      - name: "clon del repo"
+        uses: actions/checkout@v4
+
+      - name: "setup node"
+        uses: actions/setup-node@v4
+        with: 
+          node-version: 18
+      
+      - name: "eliminar package-lock.json"
+        run: |
+          rm -f package-lock.json
+          npm install
+      
+      - name : "Ejecutar Snyk"
+        uses : snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{secrets.SECRET_SNYK_TOKEN}}
+        with: 
+          command: monito 
+          args: --all-projects  --json
+     
+      - name: "sonar cloud"
+        uses : SonarSource/sonarcloud-github-action@master
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          SONAR_TOKEN: ${{ secrets.SECRET_SONAR_CLOUD}}  
