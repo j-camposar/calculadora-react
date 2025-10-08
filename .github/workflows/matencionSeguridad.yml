@@ -3,7 +3,7 @@ name: Snyk scan
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [ seguridad ]
 
 jobs:
   snyk:
