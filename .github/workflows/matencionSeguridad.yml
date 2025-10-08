@@ -18,7 +18,6 @@ jobs:
           rm -f package-lock.json
           npm install
 
-      - run: npm ci
       - name: Run Snyk test
         uses: snyk/actions/node@master
         env:
