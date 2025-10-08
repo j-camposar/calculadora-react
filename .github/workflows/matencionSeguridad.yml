@@ -1,0 +1,32 @@
+name: Snyk Scan
+on:
+  push:
+    branches: [ seguridad ]
+  pull_request:
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Clean and install dependencies
+        run: |
+          rm -f package-lock.json
+          npm install
+
+      - name: Run Snyk test
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SECRET_SNYK_TOKEN }}
+        with:
+          command: monitor
+          args: --all-projects --json
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SECRET_SONAR_CLOUD }}
