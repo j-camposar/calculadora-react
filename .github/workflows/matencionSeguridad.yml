@@ -1,5 +1,4 @@
 name: Snyk Scan
-
 on:
   push:
     branches: [ seguridad ]
@@ -13,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
-          
+
       - name: Clean and install dependencies
         run: |
           rm -f package-lock.json
@@ -27,3 +26,8 @@ jobs:
         with:
           command: test
           args: --all-projects --json
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.SECRET_GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SECRET_SONAR_TOKEN }}
