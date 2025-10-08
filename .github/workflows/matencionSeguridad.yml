@@ -24,7 +24,6 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SECRET_SNYK_TOKEN }}
         with:
           command: monitor
-          command: test
           args: --all-projects --json
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
