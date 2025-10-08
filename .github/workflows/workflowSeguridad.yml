@@ -1,7 +1,7 @@
 name: seguirdad con snyk y sonarcloud
 on:
   push:
-    branches: [ workflowSeguridad ]
+    branches: [ main ]
 
 jobs :
   snyk-and-sonarcloud:
