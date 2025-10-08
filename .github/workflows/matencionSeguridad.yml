@@ -13,6 +13,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
+          
+      - name: Clean and install dependencies
+        run: |
+          rm -f package-lock.json
+          npm install
+
       - run: npm ci
       - name: Run Snyk test
         uses: snyk/actions/node@master
