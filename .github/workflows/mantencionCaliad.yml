@@ -1,7 +1,7 @@
 name: Comprobando mi Codigo 
 on: 
   pull_request:
-    branches: ["main"]
+    branches: ["deploy"]
 jobs:
   comprobar-calidad-y-testing:
     runs-on: ubuntu-latest

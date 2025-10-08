@@ -1,0 +1,32 @@
+name: Snyk scan
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run Snyk test (open-source vulnerabilities)
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SECRET_SNYK_TOKEN }}
+        with:
+          args: test --all-projects --json > snyk-report.json
+      
+      - name: Upload Snyk SARIF (optional)
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: snyk-report.sarif
